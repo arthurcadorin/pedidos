@@ -7,7 +7,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "TB_CIDADE")
 @SequenceGenerator(name = "seq_cidade")
-
 public class Cidade implements Serializable {
 
     private static final long serialVersionUID = 1L;

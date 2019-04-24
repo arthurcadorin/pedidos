@@ -22,7 +22,7 @@ public class Estado implements Serializable {
     @Column (name = "ES_NOME")
     private String nome;
 
-    @OneToMany(mappedBy = "estado")
+    @OneToMany
     private List<Cidade> cidades = new ArrayList<>();
 
 
