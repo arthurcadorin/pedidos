@@ -1,8 +1,13 @@
 package br.com.apsoo.pedidos.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +16,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "TB_CATEGORIA")
 @SequenceGenerator(name = "seq_categoria")
-
 public class Categoria implements Serializable {
 
-    private static final long seriaVersionIUD = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "CA_ID")
@@ -24,18 +28,10 @@ public class Categoria implements Serializable {
     @Column(name = "CA_NOME")
     private String nome;
 
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
     @ManyToMany(mappedBy = "categorias")
     private List<Produto> produtos = new ArrayList<>();
 
-    public Categoria (){
+    public Categoria() {
 
     }
 
@@ -58,6 +54,14 @@ public class Categoria implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     @Override

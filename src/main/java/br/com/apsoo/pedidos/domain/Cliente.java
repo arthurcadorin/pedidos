@@ -1,23 +1,36 @@
 package br.com.apsoo.pedidos.domain;
 
 import br.com.apsoo.pedidos.domain.enumerations.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.*;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Table(name = "TB_CLIENTE")
 @SequenceGenerator(name = "seq_cliente")
-
 public class Cliente implements Serializable {
-
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "CL_ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_cliente")
-    private Long id;
+    private Integer id;
 
     @Column(name = "CL_NOME")
     private String nome;
@@ -26,34 +39,38 @@ public class Cliente implements Serializable {
     private String email;
 
     @Column(name = "CL_CPF_CNPJ")
-    private String cfpOuCnpj;
+    private String cpfOuCnpj;
 
     @Column(name = "CL_TIPO")
     private TipoCliente tipo;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
     @CollectionTable(name = "TB_TELEFONE")
-    private Set<String> telefone = new HashSet<>();
+    private Set<String> telefones = new HashSet<>();
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
     }
 
-    public Cliente(Long id, String nome, String email, String cfpOuCnpj, TipoCliente tipo) {
+    public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        this.cfpOuCnpj = cfpOuCnpj;
+        this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -73,12 +90,12 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-    public String getCfpOuCnpj() {
-        return cfpOuCnpj;
+    public String getCpfOuCnpj() {
+        return cpfOuCnpj;
     }
 
-    public void setCfpOuCnpj(String cfpOuCnpj) {
-        this.cfpOuCnpj = cfpOuCnpj;
+    public void setCpfOuCnpj(String cpfOuCnpj) {
+        this.cpfOuCnpj = cpfOuCnpj;
     }
 
     public TipoCliente getTipo() {
@@ -97,12 +114,20 @@ public class Cliente implements Serializable {
         this.enderecos = enderecos;
     }
 
-    public Set<String> getTelefone() {
-        return telefone;
+    public Set<String> getTelefones() {
+        return telefones;
     }
 
-    public void setTelefone(Set<String> telefone) {
-        this.telefone = telefone;
+    public void setTelefones(Set<String> telefones) {
+        this.telefones = telefones;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override
