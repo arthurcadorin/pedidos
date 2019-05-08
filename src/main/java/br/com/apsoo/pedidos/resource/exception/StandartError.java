@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class StandartError implements Serializable {
 
-    private static final long seriaVersionIUD = 1L;
+    private static final long serialVersionUID = 1L;
 
     private Integer status;
     private String msg;
@@ -14,10 +14,6 @@ public class StandartError implements Serializable {
         this.status = status;
         this.msg = msg;
         this.timeStamp = timeStamp;
-    }
-
-    public static long getSeriaVersionIUD() {
-        return seriaVersionIUD;
     }
 
     public Integer getStatus() {
@@ -43,6 +39,4 @@ public class StandartError implements Serializable {
     public void setTimeStamp(Long timeStamp) {
         this.timeStamp = timeStamp;
     }
-
-
 }

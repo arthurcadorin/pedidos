@@ -10,22 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//caminho url
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
     @Autowired
     private CategoriaService categoriaService;
 
-
-
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public ResponseEntity<?>  buscarPorId(@PathVariable("id") Integer id){
-
+    public ResponseEntity<?> buscarPorId(@PathVariable("id") Integer id) {
         Categoria categoria = categoriaService.buscarPorId(id);
 
         return ResponseEntity.ok().body(categoria);
-
     }
-
 }

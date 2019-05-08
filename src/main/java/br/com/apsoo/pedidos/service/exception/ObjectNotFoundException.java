@@ -2,7 +2,7 @@ package br.com.apsoo.pedidos.service.exception;
 
 public class ObjectNotFoundException extends RuntimeException {
 
-    private static final long seriaVersionIUD = 1L;
+    private static final long serialVersionUID = 1L;
 
     public ObjectNotFoundException(String message) {
         super(message);

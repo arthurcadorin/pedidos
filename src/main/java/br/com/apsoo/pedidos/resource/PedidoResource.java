@@ -1,7 +1,7 @@
 package br.com.apsoo.pedidos.resource;
 
-import br.com.apsoo.pedidos.domain.Cliente;
-import br.com.apsoo.pedidos.service.ClienteService;
+import br.com.apsoo.pedidos.domain.Pedido;
+import br.com.apsoo.pedidos.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/clientes")
-public class ClienteResource {
+@RequestMapping(value = "/pedidos")
+public class PedidoResource {
 
     @Autowired
-    private ClienteService clienteService;
+    private PedidoService pedidoService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable("id") Integer id) {
-        Cliente cliente = clienteService.buscarPorId(id);
+        Pedido pedido = pedidoService.buscarPorId(id);
 
-        return ResponseEntity.ok().body(cliente);
+        return ResponseEntity.ok().body(pedido);
     }
 }

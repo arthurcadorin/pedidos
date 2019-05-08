@@ -1,3 +1,4 @@
+
 package br.com.apsoo.pedidos.domain.enumerations;
 
 public enum EstadoPagamento {
